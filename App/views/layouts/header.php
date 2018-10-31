@@ -14,8 +14,7 @@
     
     <link rel="stylesheet" href="<?= RESOURCE;?>/font-awesome/css/font-awesome.min.css" >
     <link rel="stylesheet" href="<?= BASE;?>/assets/css/style.css">  
-    
-
+ 
 
     
   </head>

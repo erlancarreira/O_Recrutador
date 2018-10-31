@@ -18,6 +18,7 @@ class App
         define('BASE'       , "http://".$_SERVER['HTTP_HOST'] . "/getRecruit");
         define('BASE_LOGIN', "http://".$_SERVER['HTTP_HOST'] . "/getRecruit/login");
         define('RESOURCE'       , "http://".$_SERVER['HTTP_HOST'] . "/getRecruit/node_modules");
+        define('KEYMAPS', 'AIzaSyC-IUijqWt5dUOmM89pnYc9pyiC2AqrCgo');
         
 
         define('PATH'           , realpath('./'));

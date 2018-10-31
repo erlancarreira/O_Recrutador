@@ -23,7 +23,7 @@
     <div class="container container-height">
       <div class="row row-height justify-content-center align-items-center">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-          <?php var_dump($_SESSION); ?>
+          
           <?php if(!empty($viewVar['msg'])): ?>
             <div class="alert <?= $viewVar['alert']; ?> alert-dismissible fade show mb-1" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="custom-control custom-checkbox mb-3">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <input name="remember_me" type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Ei, lembra de mim!</label>
                 </div>
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>

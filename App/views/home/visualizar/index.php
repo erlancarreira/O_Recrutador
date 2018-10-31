@@ -38,6 +38,7 @@
         </div>
       </div>
       </form>
+      <!-- <div class="maps" id="map"></div> -->
     </div>
    
     <!-- <?php// else: ?>

@@ -10,15 +10,15 @@
     <?php endif; ?> 
     <div class="form-group">
       <label for="profissao">Profissão</label>
-      <input type="text" class="form-control" id="profissao" placeholder="Qual é a habilidade do seu recruta?" name="profissao">
+      <input type="text" class="form-control" id="profissao" placeholder="Qual é a habilidade do seu recruta?" name="profissao" required>
     </div>
     <div class="form-group">
       <label for="nome">Nome</label>
-      <input type="text" class="form-control" id="nome" placeholder="Qual é o nome do seu recruta?" name="nome">
+      <input type="text" class="form-control" id="nome" placeholder="Qual é o nome do seu recruta?" name="nome" required>
     </div>
     <div class="form-group">
       <label for="idade">Idade</label>
-      <input type="number" class="form-control" min="16" max="120" step="5" id="idade" placeholder="Qual é a idade do seu recruta?" name="idade">
+      <input type="number" class="form-control" min="16" max="120" step="5" id="idade" placeholder="Qual é a idade do seu recruta?" name="idade" required>
     </div>
     <div class="form-group">
       <label for="sexo">O sexo?</label>
@@ -30,18 +30,18 @@
     </div>
     <div class="form-group">
       <label for="sobre">Descreeva um pouco a habilidade do seu recruta!</label>
-      <textarea name="sobre" class="form-control" id="sobre" rows="3"></textarea>
+      <textarea name="sobre" class="form-control" id="sobre" rows="3" required></textarea>
     </div>
 
 
     <div class="form-row">
       <div class="form-group col-md-10">
-        <label for="endereco">Endereco</label>
-        <input type="text" class="form-control" id="endereco" placeholder="Qual é o endereço do seu recruta" name="endereco">
+        <label for="endereco" >Endereco</label>
+        <input type="text" class="form-control" id="endereco" placeholder="Qual é o endereço do seu recruta" name="endereco" required>
       </div>
       <div class="form-group col-md-2">
         <label for="numero">Numero</label>
-        <input name="numero" type="text" class="form-control" id="numero" placeholder="255A">
+        <input name="numero" type="text" class="form-control" id="numero" placeholder="255A" required>
       </div>
     </div>
     <div class="form-row">
@@ -64,7 +64,7 @@
       
       <div class="form-group col-md-2">
         <label for="cep">Cep</label>
-        <input name="cep" type="text" class="form-control cep" id="cep"  placeholder="XX.XXX-XXX">
+        <input name="cep" type="text" class="form-control cep" id="cep"  placeholder="XX.XXX-XXX" required>
       </div>
     </div>
     <button type="submit" class="btn btn-primary btn-sm btn-block">Cadastrar</button>

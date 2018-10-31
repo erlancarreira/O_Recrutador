@@ -57,8 +57,8 @@ class LoginDAO extends BaseDAO
     {
         try {
             
-            !$email = $request['email'];
-            !$pass = $request['pass'];
+            !$email = $request->email;
+            !$pass = $request->pass;
 
             $query = $this->select(
                 "SELECT idUser, userName, email FROM users 
