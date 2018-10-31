@@ -5,16 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    
-    <!-- Bootstrap CSS -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="<?= RESOURCE;?>assets/css/bootstrap.min.css" > 
-    <link rel="stylesheet" href="<?= RESOURCE;?>assets/css/style.css"> 
-
-
     <title><?= TITLE; ?></title>
+    <!-- fontAewsome CSS -->
+    <!-- Bootstrap CSS -->
+    
+    <link rel="stylesheet" href="<?= RESOURCE;?>/bootstrap/dist/css/bootstrap.min.css" >
+
+    
+    <link rel="stylesheet" href="<?= RESOURCE;?>/font-awesome/css/font-awesome.min.css" >
+    <link rel="stylesheet" href="<?= BASE;?>/assets/css/style.css">  
+    
+
+
+    
   </head>
   <body>
    

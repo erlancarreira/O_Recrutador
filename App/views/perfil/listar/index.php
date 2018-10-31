@@ -21,9 +21,12 @@
           <h4>Recruta</h4> 
         </div>
         <div class="card-body">
+          <img class="img-fluid userImage" src="<?= BASE; ?>/assets/img/user.png">
           <h5 class="card-title">Profissão: <?= $profile->getCareer(); ?></h5>
           <p class="card-text">Nome: <?= $profile->getName(); ?></p>
           <p class="card-text">Sobre: <?= $profile->getDescription(); ?></p>
+          
+
           <input type="submit" value="Editar" class="btn btn-sm btn-outline-primary" formaction="<?= BASE; ?>/perfil/editar"> 
           <input type="submit" value="Excluir" class="btn btn-sm btn-danger" formaction="<?= BASE; ?>/perfil/excluir">
         </div>

@@ -33,11 +33,17 @@ class LoginController extends Controller
       self::setViewParam('msg', 'Usuario ou senha incorreta!');   
    	} else {
    	//Caso os dados estejam corretos eu entro no ELSE
-   		self::setViewParam('alert', 'alert-success');
-      self::setViewParam('msg', 'Logado com sucesso!');
+   		self::redirect('/home');
    	}
 
 	}
+
+  public function SignOut() {
+    unset($_SESSION['user']);
+    session_destroy();
+
+    self::redirect('/home');
+  } 
 
 
 	private function checkValue($request) {

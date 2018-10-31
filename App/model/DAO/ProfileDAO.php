@@ -214,4 +214,14 @@ class ProfileDAO extends BaseDAO
         
     }
 
+    public function searchProfile($keyWord) {
+        $this->result = $this->select(
+            "SELECT * FROM profile p, address a WHERE p.idProfile = a.idProfile AND (p.career LIKE '%$keyWord%' OR p.name LIKE '%$keyWord%' OR p.age LIKE '%$keyWord%' OR p.description LIKE '%$keyWord%')"
+        );
+
+        if($this->result->rowCount() > 0) { 
+            return $this->result->fetchAll(PDO::FETCH_OBJ);
+        }
+    }
+
 }

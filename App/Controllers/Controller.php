@@ -13,13 +13,14 @@ abstract class Controller
         $message = $this->getMessages();
         $this->setViewParam('nameController',$app->getControllerName());
         $this->setViewParam('nameAction',$app->getAction());
+        
     }
 
     public function render($view)
     {
         $viewVar   = $this->getViewVar();       
         
-        var_dump($this->getMessages());
+        // var_dump(self::getMessages());
 
         require_once PATH . '/App/views/layouts/header.php';
         require_once PATH . '/App/views/layouts/menu.php';

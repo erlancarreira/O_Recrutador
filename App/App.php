@@ -15,9 +15,9 @@ class App
         /*
          * Constantes do sistema
          */
-        define('BASE'       , "http://".$_SERVER['HTTP_HOST'] . "/projeto_final");
-        define('BASE_LOGIN', "http://".$_SERVER['HTTP_HOST'] . "/projeto_final/login");
-        define('RESOURCE'       , "http://".$_SERVER['HTTP_HOST'] . "/projeto_final/");
+        define('BASE'       , "http://".$_SERVER['HTTP_HOST'] . "/getRecruit");
+        define('BASE_LOGIN', "http://".$_SERVER['HTTP_HOST'] . "/getRecruit/login");
+        define('RESOURCE'       , "http://".$_SERVER['HTTP_HOST'] . "/getRecruit/node_modules");
         
 
         define('PATH'           , realpath('./'));
@@ -47,6 +47,7 @@ class App
         if (!$this->controller) {
             $this->controller = new HomeController($this);
             $this->controller->index();
+
         }
 
         if (!file_exists(PATH . '/App/Controllers/' . $this->controllerFile)) {
@@ -60,7 +61,9 @@ class App
             throw new Exception("Erro na aplicação", 500);
         }
         
+
         if (method_exists($objetoController, $this->action)) {
+
             $objetoController->{$this->action}($this->params);
             return;
         } else if (!$this->action && method_exists($objetoController, 'index')) {
@@ -75,11 +78,11 @@ class App
     public function url () {
 
         if ( isset( $_GET['url'] ) ) {
-
+            
             $path = $_GET['url'];
             $path = rtrim($path, '/');
             $path = filter_var($path, FILTER_SANITIZE_URL); 
-
+            
             $path = explode('/', $path);
 
             $this->controller  = $this->verificaArray( $path, 0 );

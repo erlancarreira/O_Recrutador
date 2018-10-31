@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?= RESOURCE; ?>assets/css/all.css">
-    <link rel="stylesheet" href="<?= RESOURCE; ?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE; ?>/assets/css/all.css">
+    <link rel="stylesheet" href="<?= RESOURCE;?>/bootstrap/dist/css/bootstrap.min.css" >
     
 
-    <link rel="stylesheet" href="<?= RESOURCE; ?>assets/css/login.css">
-    <link rel="stylesheet" href="<?= RESOURCE; ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE; ?>/assets/css/login.css">
+    <link rel="stylesheet" href="<?= BASE; ?>/assets/css/style.css">
 
     <title><?= TITLE; ?></title>
   </head>
@@ -55,7 +55,7 @@
               
             </form>
             <div class="form-label-group text-center"> 
-              <a href="../login" class="btn btn-sm btn-outline-primary btn-block text-uppercase">Ja tem uma conta? Vem ca infeliz!</a>
+              <a href="<?= BASE; ?>/login" class="btn btn-sm btn-outline-primary btn-block text-uppercase">Ja tem uma conta? Vem ca infeliz!</a>
             </div>
           </div>
           
@@ -70,11 +70,12 @@
 
   </footer>
   <!-- Footer -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="<?= RESOURCE; ?>assets/js/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="<?= RESOURCE; ?>assets/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="<?= RESOURCE;?>/jquery/dist/jquery.min.js"></script>
+  <script src="<?= RESOURCE;?>/popper.js/dist/umd/popper.js"></script>
+  <script src="<?= RESOURCE;?>/bootstrap/dist/js/bootstrap.min.js"></script>
+ 
+  <script src="<?= RESOURCE; ?>/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

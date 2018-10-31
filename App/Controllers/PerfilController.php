@@ -10,7 +10,8 @@ class PerfilController extends Controller
 
     public function __construct() 
     {
-    	  
+    	if(!$_SESSION['user']) { self::redirect('/home'); }  
+    	
     	$this->ProfileDAO = new ProfileDAO();
         self::setViewParam('estados', $this->ProfileDAO->getLocation('state'));
         self::setViewParam('cidades', $this->ProfileDAO->getLocation('city'));

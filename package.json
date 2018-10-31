@@ -1,0 +1,16 @@
+{
+  "name": "getRecruit",
+  "version": "1",
+  "description": "Projeto UTD - getRecruit",
+  "main": "index.js",
+  "repository": "https://github.com/erlancarreira/O_Recrutador.git",
+  "author": "Erlan Carreira <erlancarreira@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "jquery-mask-plugin": "^1.14.15",
+    "popper.js": "^1.14.4"
+  }
+}

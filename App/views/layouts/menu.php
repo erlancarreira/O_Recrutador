@@ -26,9 +26,9 @@
               </li>
               <?php endif; ?>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline my-2 my-lg-0 " action="<?= BASE; ?>/home/search">
+              <input name="search" class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Search</button>
             </form>
             
             <?php if(!isset($_SESSION['user']) && empty($_SESSION['user'])): ?>
@@ -41,6 +41,12 @@
                 <a class="nav-link" href="<?= BASE; ?>/cadastro">Cadastre-se</a>
               </li>
             </ul>  
+            <?php else: ?>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="<?= BASE; ?>/login/SignOut">Sair</a>
+              </li>             	     
+            </ul> 
             <?php endif; ?>
         </div>
     </div>

@@ -18,7 +18,7 @@
     </div>
     <div class="form-group">
       <label for="idade">Idade</label>
-      <input type="number" class="form-control" id="idade" placeholder="Qual é a idade do seu recruta?" name="idade">
+      <input type="number" class="form-control" min="16" max="120" step="5" id="idade" placeholder="Qual é a idade do seu recruta?" name="idade">
     </div>
     <div class="form-group">
       <label for="sexo">O sexo?</label>
@@ -64,7 +64,7 @@
       
       <div class="form-group col-md-2">
         <label for="cep">Cep</label>
-        <input name="cep" type="text" class="form-control" id="cep"  placeholder="XX.XXX-XXX">
+        <input name="cep" type="text" class="form-control cep" id="cep"  placeholder="XX.XXX-XXX">
       </div>
     </div>
     <button type="submit" class="btn btn-primary btn-sm btn-block">Cadastrar</button>
