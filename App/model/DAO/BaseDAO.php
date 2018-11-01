@@ -24,6 +24,7 @@ abstract class BaseDAO
 
     public function insert($table, $cols, $values, $lastInsert = false) 
     {
+        
         if(!empty($table) && !empty($cols) && !empty($values))
         {
             $parametros    = $cols;

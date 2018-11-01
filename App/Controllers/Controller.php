@@ -6,7 +6,7 @@ abstract class Controller
 {
     protected $app;
     private $viewVar;
-    private $messages;
+    private $alert;
 
     public function __construct($app)
     {
@@ -19,7 +19,7 @@ abstract class Controller
     public function render($view)
     {
         $viewVar   = $this->getViewVar();       
-        
+        $alert     = $this->getAlert();
         // var_dump(self::getMessages());
 
         require_once PATH . '/App/views/layouts/header.php';
@@ -66,13 +66,22 @@ abstract class Controller
         }
     }
 
-    // public function getData() 
-    // {
-    //     return $this->data;
-    // }
+    public function getAlert()
+    {   
+        return $this->alert;
+    }
 
-    // public function setData($data)
-    // {
-    //     $this->data = $data;
-    // }
+    public function setAlert($name, $alert, $msg)
+    {   
+        
+        $alertMsg = [ 'alert' => $name, 'alertClass' => $alert, 'alertMsg' => $msg ];
+        if ($name != "" && $alert != "" && $msg != "") {
+            
+
+            $this->alert = $alertMsg;
+            
+        }
+    }
+     
+    
 }

@@ -12,12 +12,12 @@ error_reporting(E_ALL);
 
 spl_autoload_register(function($value){
 
-    $controllers = __DIR__."/App/controllers".DIRECTORY_SEPARATOR.$value.".php";
+    $controllers = __DIR__."/App/Controllers".DIRECTORY_SEPARATOR.$value.".php";
     if(file_exists($controllers)) {
         require_once($controllers);   
     }
 
-    $filename = __DIR__."/App/model".DIRECTORY_SEPARATOR.$value.".php";
+    $filename = __DIR__."/App/Model".DIRECTORY_SEPARATOR.$value.".php";
     if(file_exists($filename)) {
     	require_once($filename);
     }

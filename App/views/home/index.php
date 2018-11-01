@@ -16,7 +16,7 @@
             <img class="img-fluid userImage" src="<?= BASE; ?>/assets/img/user.png">
             <h5 class="card-title">Profissão: <?= $profile->getCareer(); ?></h5>
             <p class="card-text">Nome: <?= $profile->getName(); ?></p>
-            <p class="card-text">Sobre: <?= $profile->getDescription(); ?></p>
+            <p class="card-text description">Sobre: <?= $profile->getDescription(); ?></p>
             <button type="submit" class="btn btn-sm btn-primary">Visualizar</button>
           </div>
         </div>

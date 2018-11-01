@@ -1,13 +1,6 @@
 <main class="col-md-8 mx-auto px-5">
   <form class="my-5" method="POST">
-    <?php if(!empty($viewVar['msg'])): ?>
-      <div class="alert <?= $viewVar['alert']; ?> alert-dismissible fade show mb-1" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <?= $viewVar['msg']; ?>
-      </div>
-    <?php endif; ?> 
+    
     <div class="form-group">
       <label for="profissao">Profissão</label>
       <input type="text" class="form-control" id="profissao" placeholder="Qual é a habilidade do seu recruta?" name="profissao" required>

@@ -1,13 +1,20 @@
 <div class="container">
-  <div class="row">   
-    <?php if(!empty($viewVar['msg'])): ?>
-      <div class="alert <?= $viewVar['alert']; ?> alert-dismissible fade show mb-1" role="alert">
+  <div class="row">
+    <div class="col pt-3">
+      
+      <?php if(!empty($alert['alert'])): ?>
+      <div class="alert <?= $alert['alertClass']; ?> alert-dismissible fade show mb-1" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <?= $viewVar['msg']; ?>
+        <?= $alert['alertMsg']; ?>
       </div>
     <?php endif; ?>
+    </div>
+  </div>
+  
+  <div class="row">   
+    
     <?php if(isset($viewVar['perfis']) && !empty($viewVar['perfis'])): ?>
     
     <?php foreach ($viewVar['perfis'] as $profile): ?>
@@ -15,7 +22,7 @@
       <form method="GET"> 
       <input formmethod="post" type="hidden" name="idProfile" value="<?= $profile->getIdProfile(); ?>"> 
       <input formmethod="post" type="hidden" name="idUser" value="<?= $profile->getIdUser(); ?>"> 
-      <div class="card my-5 box-shadow text-center">
+      <div class="card my-3 box-shadow text-center">
        <!--  <img class="card-img-top" src="..." alt="Card image cap"> -->
         <div class="card-header py-0">
           <h4>Recruta</h4> 
@@ -24,7 +31,7 @@
           <img class="img-fluid userImage" src="<?= BASE; ?>/assets/img/user.png">
           <h5 class="card-title">Profissão: <?= $profile->getCareer(); ?></h5>
           <p class="card-text">Nome: <?= $profile->getName(); ?></p>
-          <p class="card-text">Sobre: <?= $profile->getDescription(); ?></p>
+          <p class="card-text  description">Sobre: <?= $profile->getDescription(); ?></p>
           
 
           <input type="submit" value="Editar" class="btn btn-sm btn-outline-primary" formaction="<?= BASE; ?>/perfil/editar"> 

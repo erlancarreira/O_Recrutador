@@ -5,13 +5,14 @@ class PerfilController extends Controller
 {   
     private $ProfileDAO = array(); 
     private $Profile;
-    // private $alert;
-
-
+    private $Message; 
     public function __construct() 
     {
     	if(!$_SESSION['user']) { self::redirect('/home'); }  
     	
+    	
+    	$this->Message = new Message();
+        
     	$this->ProfileDAO = new ProfileDAO();
         self::setViewParam('estados', $this->ProfileDAO->getLocation('state'));
         self::setViewParam('cidades', $this->ProfileDAO->getLocation('city'));
@@ -26,27 +27,43 @@ class PerfilController extends Controller
         	self::setViewParam('msg', 'Cadastre um recruta e seja um recrutador!');
         }
 
+        if(!empty($this->Message->has('alert-success'))) {
+        self::setAlert('msg', 'alert-success', $this->Message->getMessage('alert-success'));
+        }   
+        // if(!empty($this->Message->has('alert-danger'))) {
+        // 	self::setViewParam('msg', $this->Message->getMessage('alert-danger')); 
+        // 	self::setViewParam('alert', 'alert-danger'); 
+        // }
+
+        // if(!empty($this->Message->has('alert-success'))) { 
+        // 	self::setViewParam('msg', $this->Message->getMessage('alert-success')); 
+        // 	self::setViewParam('alert', 'alert-success');        
+        // }
+
+
         $this->render('perfil/listar');	
 	}
 
 	public function cadastrar() 
 	{ 
-		if(isset($_POST) && !empty($_POST)) {
+		if(Helps::getRequest($_POST)) {
 		   
 		    $request = (object) filter_input_array(INPUT_POST,FILTER_SANITIZE_MAGIC_QUOTES);
-		    $request->idProfile = null;    
+		    // $request->idProfile = null;    
 		    $this->Profile = $this->setProfile($request);      
             
             //Recebe dois parâmetros 
             //1 Os valores armazenados 
             //2 Confirma se precisa do lastInsertId que por padrao é definido como falso  
             if(!$this->ProfileDAO->createProfile($this->Profile, true)) {
-                self::setViewParam('alert', 'alert-danger');
-                self::setViewParam('msg', 'Preencha todos os campos'); 
+                $this->Message->setMessage('alert-danger','Preencha todos os campos');
+                $this->redirect('/perfil');               
 
             } else {
-                self::setViewParam('alert', 'alert-success');
-                self::setViewParam('msg', 'Dados cadastrado com sucesso!'); 
+            	$this->Message->setMessage('alert-success','Dados cadastrado com sucesso');
+            	$this->redirect('/perfil');    	
+                // self::setViewParam('alert', 'alert-success');
+                // self::setViewParam('msg', 'Dados cadastrado com sucesso!'); 
             }
 		} 
 
@@ -137,7 +154,7 @@ class PerfilController extends Controller
 	{
         if(isset($request) && !empty($request)) {
 	        $this->Profile = new Profile();
-	        $this->Profile->setIdProfile($request->idProfile);
+	        $this->Profile->setIdProfile((!empty($request->idProfile)) ? $request->idProfile : null);
 		    $this->Profile->setIdUser($_SESSION['user']['idUser']);
 	        $this->Profile->setCareer($request->profissao);
 	        $this->Profile->setName($request->nome);
@@ -155,9 +172,16 @@ class PerfilController extends Controller
         }
 	}
 
-	private function request($request) 
-	{
-        return (isset($request) && !empty($request)) ? $request->value : false;
-	}
+	
     
+    // public function getMsg() 
+    // {
+        
+    //     return ($this->msg) ? $this->msg : null;
+    // }
+
+    // public function setMsg($msg) 
+    // {
+    // 	$this->msg = $msg;
+    // }
 }

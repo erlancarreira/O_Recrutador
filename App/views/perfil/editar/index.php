@@ -37,7 +37,7 @@
       </div>
       <div class="form-group">
         <label for="sobre">Sobre o seu recruta</label>
-        <textarea name="sobre" class="form-control" id="sobre" rows="3"><?= $viewVar['perfil']->getDescription(); ?></textarea>
+        <textarea name="sobre" class="form-control " id="sobre" rows="3"><?= $viewVar['perfil']->getDescription(); ?></textarea>
       </div>
        
       <div class="form-row">
