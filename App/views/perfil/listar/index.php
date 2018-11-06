@@ -1,15 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col pt-3">
-      
-      <?php if(!empty($alert['alert'])): ?>
-      <div class="alert <?= $alert['alertClass']; ?> alert-dismissible fade show mb-1" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <?= $alert['alertMsg']; ?>
-      </div>
-    <?php endif; ?>
+      <?php if(!empty($alert->getAlert()['msg'])): ?>
+        <div class="alert <?= $alert->getAlert()['type']; ?> alert-dismissible fade show mb-1" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <?= $alert->getAlert()['msg']; ?>
+        </div>
+      <?php endif ?>
     </div>
   </div>
   
@@ -31,7 +30,7 @@
           <img class="img-fluid userImage" src="<?= BASE; ?>/assets/img/user.png">
           <h5 class="card-title">Profissão: <?= $profile->getCareer(); ?></h5>
           <p class="card-text">Nome: <?= $profile->getName(); ?></p>
-          <p class="card-text  description">Sobre: <?= $profile->getDescription(); ?></p>
+          <p class="card-text description">Sobre: <?= $profile->getDescription(); ?></p>
           
 
           <input type="submit" value="Editar" class="btn btn-sm btn-outline-primary" formaction="<?= BASE; ?>/perfil/editar"> 

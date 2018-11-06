@@ -1,25 +1,14 @@
 <div class="container">
   <div class="row">
-    <!-- <?php //foreach ($viewVar['perfil'] as $profile): ?> -->
     <div class="col-md-6 mx-auto">
-
-      <?php if(!empty($viewVar['msg'])): ?>
-        <div class="alert <?= $viewVar['alert']; ?> alert-dismissible fade show mb-1" role="alert">
+      <?php if(!empty($alert->getAlert()['msg'])): ?>
+        <div class="alert <?= $alert->getAlert()['type']; ?> alert-dismissible fade show mb-1" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <?= $viewVar['msg']; ?>
+          <?= $alert->getAlert()['msg']; ?>
         </div>
-      <?php endif; ?>
-      <?php //var_dump(self::$message->has('msg')); ?> 
-      <?php if(!empty($message)): ?>
-        <div class="alert <?= $viewVar['alert']; ?> alert-dismissible fade show mb-1" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <?= $viewVar['msg']; ?>
-        </div>
-      <?php endif; ?>
+      <?php endif ?>
       <?php if(isset($viewVar['perfil']) && !empty($viewVar['perfil'])): ?>
       <form method="POST">
         <input type="hidden" name="idProfile" value="<?= $viewVar['perfil']->getIdProfile(); ?>"> 

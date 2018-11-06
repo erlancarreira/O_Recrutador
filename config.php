@@ -17,7 +17,7 @@ spl_autoload_register(function($value){
         require_once($controllers);   
     }
 
-    $filename = __DIR__."/App/Model".DIRECTORY_SEPARATOR.$value.".php";
+    $filename = __DIR__."/App/model".DIRECTORY_SEPARATOR.$value.".php";
     if(file_exists($filename)) {
     	require_once($filename);
     }

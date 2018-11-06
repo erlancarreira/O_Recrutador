@@ -1,3 +1,8 @@
+.alert {
+  border-radius: 10px !important;
+}
+
+
 :root {
   --input-padding-x: 1.5rem;
   --input-padding-y: .75rem;
@@ -16,7 +21,6 @@ body {
   background: linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-
 
 
 .card-signin {

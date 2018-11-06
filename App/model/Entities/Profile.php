@@ -103,16 +103,6 @@ class Profile
 		$this->idAddress = $idAddress;
 	}
 
-	// public function getAddressIdProfile($addressIdProfile) 
-	// {
-	// 	return $this->addressIdProfile;
-	// }
-
-	// public function setAddressIdProfile($addressIdProfile) 
-	// {
-	// 	$this->addressIdProfile = $addressIdProfile;
-	// }
-
 	public function getAddress() 
 	{
         return $this->address;
@@ -161,8 +151,6 @@ class Profile
 
 	public function setZip($zip) 
 	{
-        
-        
 		$this->zip = preg_replace("/[^0-9]/", "", $zip);
 	}
 

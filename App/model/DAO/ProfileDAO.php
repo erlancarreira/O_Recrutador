@@ -122,31 +122,6 @@ class ProfileDAO extends BaseDAO
                 "idProfile = :idProfile"
             );
 
-
-
-            // //Classe Address
-            // $address        = $profile->getAddress();
-            // $number         = $profile->getNumber();
-            // $city           = $profile->getCity();
-            // $state          = $profile->getState();
-            // $zip            = $profile->getZip();
-            
-            // $this->result = $this->update(
-            //     'address',
-            //     "address = :address, number = :number, city = :city, state = :state, zip = :zip",
-            //     [
-                    
-            //         ':idProfile'=>$idProfile,
-
-            //         ':address'=>$address,
-            //         ':number'=>$number,
-            //         ':city'=>$city,
-            //         ':state'=>$state,
-            //         ':zip'=>$zip,
-            //     ],
-            //     "idProfile = :idProfile"
-            // );
-
         }catch (\Exception $e){
             throw new \Exception("Erro na gravação de dados.", 500);
         }   
@@ -187,7 +162,7 @@ class ProfileDAO extends BaseDAO
 
     public function deleteProfile(Profile $profile) 
     {
-    	return true;
+    	return false;
         try {
             $id = $profile->getIdProfile();
 
@@ -202,26 +177,34 @@ class ProfileDAO extends BaseDAO
 
     public function getLocation($string)
     {
-       
-
         $this->result = $this->select(
             "SELECT * FROM $string"
         );
          
-        if($this->result->rowCount() > 0) { 
-            return $this->result->fetchAll(PDO::FETCH_OBJ);
+        return $this->result->fetchAll(PDO::FETCH_OBJ);
+    }
+    
+    public function getCity($id)
+    {
+        if($id) {
+            
+            $this->result = $this->select(
+                "SELECT * FROM city WHERE state = {$id}"
+            );
         }
+        
+        return $this->result->fetchAll(PDO::FETCH_OBJ);
+        
         
     }
 
     public function searchProfile($keyWord) {
+        
         $this->result = $this->select(
             "SELECT * FROM profile p, address a WHERE p.idProfile = a.idProfile AND (p.career LIKE '%$keyWord%' OR p.name LIKE '%$keyWord%' OR p.age LIKE '%$keyWord%' OR p.description LIKE '%$keyWord%')"
         );
-
-        if($this->result->rowCount() > 0) { 
-            return $this->result->fetchAll(PDO::FETCH_OBJ);
-        }
+        
+        return $this->result->fetchAll(PDO::FETCH_OBJ);
     }
 
 }

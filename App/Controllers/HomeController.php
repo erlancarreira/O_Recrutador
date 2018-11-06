@@ -16,12 +16,6 @@ class HomeController extends Controller
 
 	public function index() 
 	{   
-	   
-	    // if(isset($_GET['idUser']) && !empty($_GET['idUser'])) {
-     //        $request = (object)filter_input_array(INPUT_GET,FILTER_SANITIZE_MAGIC_QUOTES);   
-     //        // self::visualizar($request);   
-	    // }
-
 	    $this->render('home');	
 	}
 
@@ -33,8 +27,9 @@ class HomeController extends Controller
 
 	public function search() 
 	{	
+       
        self::setViewParam('perfil', $this->ProfileDAO->searchProfile(Helps::getRequest($_GET['search']))); 
        
        $this->render('home/search');
-	}      
+	} 
 }

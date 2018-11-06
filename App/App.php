@@ -15,19 +15,19 @@ class App
         /*
          * Constantes do sistema
          */
-        define('BASE'       , "http://".$_SERVER['HTTP_HOST'] . "/getRecruit");
-        define('BASE_LOGIN', "http://".$_SERVER['HTTP_HOST'] . "/getRecruit/login");
-        define('RESOURCE'       , "http://".$_SERVER['HTTP_HOST'] . "/getRecruit/node_modules");
-        define('KEYMAPS', 'AIzaSyC-IUijqWt5dUOmM89pnYc9pyiC2AqrCgo');
+        define('BASE'       , "https://".$_SERVER['HTTP_HOST'] . "");
+        define('BASE_LOGIN', "https://".$_SERVER['HTTP_HOST'] . "/login");
+        define('RESOURCE'       , "https://".$_SERVER['HTTP_HOST'] . "/node_modules");
+        
         
 
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Recruit - Aplicação MVC em PHP - Erlan Carreira");
         
         define('DB_HOST'        , "localhost");
-        define('DB_USER'        , "root");
+        define('DB_USER'        , "erlancarreira");
         define('DB_PASSWORD'    , "");
-        define('DB_NAME'        , "sc_erlancarreira");
+        define('DB_NAME'        , "c9");
         define('DB_DRIVER'      , "mysql");
 
         $this->url();
@@ -44,7 +44,7 @@ class App
 
         $this->controllerFile   = $this->controllerName . '.php';
         $this->action           = preg_replace('/[^a-zA-Z]/i', '', $this->action);
-
+         
         if (!$this->controller) {
             $this->controller = new HomeController($this);
             $this->controller->index();
@@ -99,7 +99,6 @@ class App
 
     public function getController()
     {
-        // var_dump($this->controller);
         return $this->controller;
     }
 

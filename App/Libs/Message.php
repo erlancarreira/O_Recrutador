@@ -38,6 +38,23 @@ class Message
 	
     public function has($key) 
     {
+    
     	return isset($this->previous[$key]);
-    } 
+    }
+    
+    public function getAlert() 
+    {
+        	
+        if(self::has('alert-success')) {	
+    	   return ['type' => 'alert-success', 'msg' => self::getMessage('alert-success')];
+        } 
+        
+        if(self::has('alert-danger')) {	
+    	   return ['type' => 'alert-danger', 'msg' => self::getMessage('alert-danger')];
+        } 
+        
+        // return false;
+    }
 }
+
+?>

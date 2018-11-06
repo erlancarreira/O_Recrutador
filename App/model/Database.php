@@ -1,10 +1,6 @@
 <?php 
 include_once("config.php");
 
-// use PDO;
-// use PDOException;
-// use Exception;
-
 class Database {
 
     
@@ -29,20 +25,5 @@ class Database {
         }  
   
     }
-
-    // private function __clone()
-    // {
-    // }
-
-    /*
-     * Método unserialize do tipo privado para prevenir a desserialização
-     * da instância dessa classe.
-     *
-     * @return void
-    */ 
-    // private function __wakeup()
-    // {
-    // }   
-    
 }
 

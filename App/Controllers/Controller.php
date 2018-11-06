@@ -2,25 +2,25 @@
 
 include_once('config.php');
 
-abstract class Controller
+abstract class Controller 
 {
     protected $app;
     private $viewVar;
     private $alert;
+    
 
     public function __construct($app)
     {
-        $message = $this->getMessages();
+        
         $this->setViewParam('nameController',$app->getControllerName());
         $this->setViewParam('nameAction',$app->getAction());
-        
+        // $this->alert = new Message();
     }
 
     public function render($view)
     {
         $viewVar   = $this->getViewVar();       
-        $alert     = $this->getAlert();
-        // var_dump(self::getMessages());
+        $alert     = new Message();
 
         require_once PATH . '/App/views/layouts/header.php';
         require_once PATH . '/App/views/layouts/menu.php';
@@ -30,29 +30,30 @@ abstract class Controller
 
     public function renderView($view)
     {
-        $viewVar   = $this->getViewVar();
+        
+        $viewVar                   = $this->getViewVar();
+        $alert                     = new Message();
         require_once PATH . '/App/views/' . $view . '/index.php';
         
     }
 
     public function redirect($view)
     {
-        $message = $this->getMessages();
         header('Location: ' . BASE . $view);
         exit;
     }
 
-    public function getMessages()
-    {
-        return $this->messages;
-    }
+    // public function getMessages()
+    // {
+    //     return $this->messages;
+    // }
 
-    public function setMessage($value, $key) {
+    // public function setMessage($value, $key) {
 
-        $this->messages = function() {
-            return new Message($value, $key);
-        };
-    }
+    //     $this->messages = function() {
+    //         return new Message($value, $key);
+    //     };
+    // }
 
     public function getViewVar()
     {
@@ -66,22 +67,21 @@ abstract class Controller
         }
     }
 
-    public function getAlert()
-    {   
-        return $this->alert;
-    }
+    // public function getAlert()
+    // {   
+       
+    //     return $this->alert;
+    // }
+    
+    // }
 
-    public function setAlert($name, $alert, $msg)
-    {   
-        
-        $alertMsg = [ 'alert' => $name, 'alertClass' => $alert, 'alertMsg' => $msg ];
-        if ($name != "" && $alert != "" && $msg != "") {
-            
-
-            $this->alert = $alertMsg;
-            
-        }
-    }
+    // public function setAlert($name, $alert, $msg)
+    // {   
+    //     $alertMsg = [ 'alert' => $name, 'alertClass' => $alert, 'alertMsg' => $msg ];
+    //     if ($name != "" && $alert != "" && $msg != "") {
+    //         $this->alert = $alertMsg;
+    //     }
+    // }
      
     
 }

@@ -6,21 +6,20 @@ include_once("config.php");
 class LoginDAO extends BaseDAO
 {
     public function checkUser($request)
-    {
-        
+    {   
+        $request = (object)$request;
+        // var_dump($request); exit;
         try {
-            
-            !$email = $request['email'];
-            !$userName = $request['userName'];
             
             $query = $this->select(
                 "SELECT idUser, userName, email FROM users 
-                WHERE email = '$email' 
-                OR userName = '$userName'"
+                WHERE email = '$request->email' 
+                OR userName = '$request->userName'"
             );
             
             if($query->rowCount() > 0) {  
-                return $query->fetch(PDO::FETCH_ASSOC);
+                $query->fetch(PDO::FETCH_ASSOC);
+                return true;
             } 
 
         }catch (Exception $e){

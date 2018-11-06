@@ -1,8 +1,22 @@
 
 <div class="container">
   <div class="row">
+    <div class="col pt-3">
+      
+      <?php if(!empty($alert->getAlert()['msg'])): ?>
+        <div class="alert <?= $alert->getAlert()['type']; ?> alert-dismissible fade show mb-1" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <?= $alert->getAlert()['msg']; ?>
+        </div>
+      <?php endif ?>
+    </div>
+  </div>
+  
+  <div class="row">
     <?php if(isset($viewVar['perfil']) && !empty($viewVar['perfil'])): ?>
-    <?php foreach ($viewVar['perfil'] as $profile): ?>
+    <?php foreach ($viewVar['perfil'] as $key => $profile): ?>
     <div class="col-md-4">
       <form method="GET" action="<?= BASE; ?>/home/visualizar">
         <input type="hidden" name="idUser" value="<?= $profile->getIdUser(); ?>">

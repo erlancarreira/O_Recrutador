@@ -5,103 +5,76 @@ class PerfilController extends Controller
 {   
     private $ProfileDAO = array(); 
     private $Profile;
-    private $Message; 
+    private $message; 
+    
     public function __construct() 
     {
-    	if(!$_SESSION['user']) { self::redirect('/home'); }  
+    	if(!$_SESSION['user']) { self::redirect('/home'); }  // Se a sessao nao existir eu redireciono pra home
     	
-    	
-    	$this->Message = new Message();
-        
-    	$this->ProfileDAO = new ProfileDAO();
-        self::setViewParam('estados', $this->ProfileDAO->getLocation('state'));
-        self::setViewParam('cidades', $this->ProfileDAO->getLocation('city'));
+    	$this->ProfileDAO = new ProfileDAO(); //Instancio o ProfileDAO
+        self::setViewParam('estados', $this->ProfileDAO->getLocation('state')); //Chamo os Estados
+        self::setViewParam('cidades', $this->ProfileDAO->getLocation('city')); // Chamo as Cidades
     }
 
 	public function index() 
 	{   	
-        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-	        // $this->ProfileDAO = new ProfileDAO();
-	        self::setViewParam('perfis', $this->ProfileDAO->readProfile($_SESSION['user']['idUser']));
+        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { //Verifico se o usuario tem um ID
+	        self::setViewParam('perfis', $this->ProfileDAO->readProfile($_SESSION['user']['idUser'])); //Caso sim eu chamo os perfis deste usuario
         } else {
-        	self::setViewParam('msg', 'Cadastre um recruta e seja um recrutador!');
+        	self::setViewParam('msg', 'Cadastre um recruta e seja um recrutador!'); //Caso nao tenha nenhum perfil cadastrado eu exibo esta mensagem
         }
 
-        if(!empty($this->Message->has('alert-success'))) {
-        self::setAlert('msg', 'alert-success', $this->Message->getMessage('alert-success'));
-        }   
-        // if(!empty($this->Message->has('alert-danger'))) {
-        // 	self::setViewParam('msg', $this->Message->getMessage('alert-danger')); 
-        // 	self::setViewParam('alert', 'alert-danger'); 
-        // }
-
-        // if(!empty($this->Message->has('alert-success'))) { 
-        // 	self::setViewParam('msg', $this->Message->getMessage('alert-success')); 
-        // 	self::setViewParam('alert', 'alert-success');        
-        // }
-
-
-        $this->render('perfil/listar');	
+        $this->render('perfil/listar'); //Renderizo minha view listar	
 	}
 
 	public function cadastrar() 
 	{ 
-		if(Helps::getRequest($_POST)) {
-		   
-		    $request = (object) filter_input_array(INPUT_POST,FILTER_SANITIZE_MAGIC_QUOTES);
-		    // $request->idProfile = null;    
-		    $this->Profile = $this->setProfile($request);      
+		$this->message = new Message(); //Instancio minhas mensagens
+		
+		if(Helps::getRequest($_POST)) { // Se tiver sido enviado um post eu entro no if
+		    
+		    $request = (object) filter_input_array(INPUT_POST,FILTER_SANITIZE_MAGIC_QUOTES); // Passo um Sanitize e transformo em um objeto do stdclass
+		       
+		    $this->Profile = $this->setProfile($request); // Faco o meu set da classe Profile      
             
             //Recebe dois parâmetros 
             //1 Os valores armazenados 
             //2 Confirma se precisa do lastInsertId que por padrao é definido como falso  
             if(!$this->ProfileDAO->createProfile($this->Profile, true)) {
-                $this->Message->setMessage('alert-danger','Preencha todos os campos');
-                $this->redirect('/perfil');               
-
-            } else {
-            	$this->Message->setMessage('alert-success','Dados cadastrado com sucesso');
+                $this->message->setMessage('alert-danger','Preencha todos os campos'); // Caso esteja vazio eu exibo uma mensagem de erro
+    
+            } else { // Do contrario eu entro no ELSE e redireciono para a view listagem e exibo uma mensagem de sucesso. 
+            	$this->message->setMessage('alert-success','Dados cadastrado com sucesso');
             	$this->redirect('/perfil');    	
-                // self::setViewParam('alert', 'alert-success');
-                // self::setViewParam('msg', 'Dados cadastrado com sucesso!'); 
             }
 		} 
 
-      $this->render('perfil/cadastrar');	
+      $this->render('perfil/cadastrar'); // Renderizo a minha view de cadastrar perfil	
 	}
 
 	public function editar($request) 
 	{ 
-        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { // Se estiver setado a sessao eu entro no IF
 	       
-	        $request = (object)filter_input_array(INPUT_GET,FILTER_SANITIZE_MAGIC_QUOTES);
+	        $request = (object)filter_input_array(INPUT_GET,FILTER_SANITIZE_MAGIC_QUOTES); // Passo um sanitize e transformo em um objeto do stdclass
             
-            self::setViewParam('perfil', $this->ProfileDAO->readProfile($_SESSION['user']['idUser'], $request->idProfile));
+            self::setViewParam('perfil', $this->ProfileDAO->readProfile($_SESSION['user']['idUser'], $request->idProfile)); //Trago todos os perfis deste usuario
 
         } 
          
-        if(isset($request->idUser) && !empty($request->idUser) && isset($request->idProfile) && !empty($request->idProfile)) 
-        {   
-           	if(isset($_POST) && !empty($_POST)) {
-        	    $request = (object)filter_input_array(INPUT_POST,FILTER_SANITIZE_MAGIC_QUOTES);
+        if(isset($request->idUser) && !empty($request->idUser) && isset($request->idProfile) && !empty($request->idProfile)) { // Se estiver setado o idUser e o idProfile eu entro no IF  
+        $this->message = new Message(); // Instancio a minha classe de mensagens    
+           	if(isset($_POST) && !empty($_POST)) { // Se o post estiver setado e nao for vazio eu entro no IF
+        	    $request = (object)filter_input_array(INPUT_POST,FILTER_SANITIZE_MAGIC_QUOTES); // Passo um sanitize e transformo em um objeto do stdclass
         	    
-        	    $this->Profile = $this->setProfile($request);  
+        	    $this->Profile = $this->setProfile($request);  // Faco o meu set da classe Profile  
 
-        	    if($this->ProfileDAO->updateProfile($this->Profile) || $this->ProfileDAO->updateAddress($this->Profile)) {
-        	    	// $this->ProfileDAO->updateAddress($this->Profile);
-                    // echo "ENTREI no UPDATEPROFILE"; 
-                    	
-        	   	    self::setViewParam('alert', 'alert-success');
-                    self::setViewParam('msg', 'Dados atualizado com sucesso!'); 
+        	    if($this->ProfileDAO->updateProfile($this->Profile) || $this->ProfileDAO->updateAddress($this->Profile)) { // Caso o usuario tenha alterado algum dos campos eu entro no IF
+                    $this->message->setMessage('alert-success','Dados atualizado com sucesso!'); //Exibo uma mensagem de sucesso e redireciono para a view listagem	
         	        $this->redirect('/perfil'); 
 		    	} else { 
-		    	    //echo "NAO ENTREI no UPDATEPROFILE";
-		            // Message::showMsg("Preencha todos os campos!", "alert-danger");
-		           
-		            self::setViewParam('alert', 'alert-danger');
-		            self::setViewParam('msg', 'Nenhum campo foi alterado!');
-		            
-		            $this->render('/perfil/editar');     
+		            $this->message->setMessage('alert-danger','Nenhum campo foi alterado!'); //Se nada foi alterado eu exibo um alert informando que nada foi modificado.
+		               
 		        } 
 
 
@@ -114,43 +87,42 @@ class PerfilController extends Controller
 
 	public function excluir() 
 	{   
-        if(isset($_POST['idProfile']) && !empty($_POST['idProfile']) && isset($_POST['idUser']) && !empty($_POST['idUser'])) {
+       
+        if(isset($_POST['idProfile']) && !empty($_POST['idProfile']) && isset($_POST['idUser']) && !empty($_POST['idUser'])) { // Se estiver setado o idUser e o idProfile eu entro no IF  
 		        
-	        $this->request = (object)filter_input_array(INPUT_POST,FILTER_SANITIZE_MAGIC_QUOTES); 
+	        $this->request = (object)filter_input_array(INPUT_POST,FILTER_SANITIZE_MAGIC_QUOTES);  // Passo um sanitize e transformo em um objeto do stdclass
 	          
-            if($id = $this->ProfileDAO->readProfile($this->request->idUser, $this->request->idProfile)) {	
-	        	
-	        	if($this->ProfileDAO->deleteProfile($id)) {
-	        		self::setMessage('msg', 'Recruta deletado com sucesso');
-	        		self::setViewParam('alert', 'alert-success');
-                    self::setViewParam('msg', 'Recruta deletado com sucesso!'); 
-                    $this->redirect('/perfil/excluir');
-	        	} 
+            if($id = $this->ProfileDAO->readProfile($this->request->idUser, $this->request->idProfile)) { // Pego o ID do profile que o usuario escolheu     	
+	        	$this->message = new Message(); // Instancio a minha classe de mensagens    
+	        	if($this->ProfileDAO->deleteProfile($id)) { // Chamo minha funcao de delete 
+	                
+	                $this->message->setMessage('alert-success','Recruta deletado com sucesso!'); // Se ok eu deleto o usuario redireciono para a view de listagem e exibo uma mensagem
+                    $this->redirect('/perfil');
+	        	} else {
+	        	    $this->message->setMessage('alert-danger','Usuario nao deletado!'); // Se por algum motivo nao deletar eu redireciono e exibo um alerta
+	        	    $this->redirect('/perfil');
+	        	}
 	        }
 
 	        unset($_SESSION['idUser']);
 	        unset($_SESSION['idProfile']);
         } 
-
-        if(isset($_GET['idProfile']) && !empty($_GET['idProfile'])) {
-	        $_SESSION['idUser'] = $_GET['idUser'];
-	        $_SESSION['idProfile'] = $_GET['idProfile'];
-	        
-	        $result = $this->ProfileDAO->readProfile($_SESSION['idUser'],$_SESSION['idProfile']);
-            
-        } 
-	        //else {	        
-
-		    // $this->redirect('/perfil');
         
-      //   }  
-	                    
-        self::setViewParam('perfil', $this->ProfileDAO->readProfile($_SESSION['idUser'], $_SESSION['idProfile']));
+        //Listamos todos os recrutas deste usuario  
+        // if(isset($_GET['idProfile']) && !empty($_GET['idProfile'])) { // Se estiver setado o idProfile e caso ele nao esteja vazio 
+	       // $_SESSION['idUser'] = $_GET['idUser'];
+	       // $_SESSION['idProfile'] = $_GET['idProfile'];
+	        
+	       // $result = $this->ProfileDAO->readProfile($_SESSION['idUser'],$_SESSION['idProfile']);
+            
+        // } 
+        
+        // self::setViewParam('perfil', $this->ProfileDAO->readProfile($_SESSION['idUser'], $_SESSION['idProfile']));
 
         $this->render('perfil/excluir');	
 	}
 
-	private function setProfile($request)
+	private function setProfile($request) // Get & Set
 	{
         if(isset($request) && !empty($request)) {
 	        $this->Profile = new Profile();
@@ -171,17 +143,4 @@ class PerfilController extends Controller
 	        return $this->Profile;
         }
 	}
-
-	
-    
-    // public function getMsg() 
-    // {
-        
-    //     return ($this->msg) ? $this->msg : null;
-    // }
-
-    // public function setMsg($msg) 
-    // {
-    // 	$this->msg = $msg;
-    // }
 }

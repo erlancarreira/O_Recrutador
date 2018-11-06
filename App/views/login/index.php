@@ -24,14 +24,14 @@
       <div class="row row-height justify-content-center align-items-center">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
           
-          <?php if(!empty($viewVar['msg'])): ?>
-            <div class="alert <?= $viewVar['alert']; ?> alert-dismissible fade show mb-1" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <?= $viewVar['msg']; ?>
-            </div>
-          <?php endif; ?>
+          <?php if(!empty($alert->getAlert()['msg'])): ?>
+          <div class="alert <?= $alert->getAlert()['type']; ?> alert-dismissible fade show mb-1" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <?= $alert->getAlert()['msg']; ?>
+          </div>
+          <?php endif ?>
           <div class="card card-signin mb-3">
             <div class="card-body">
               <h5 class="card-title text-center">Login</h5>
