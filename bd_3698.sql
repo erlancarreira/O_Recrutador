@@ -1,34 +1,31 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.0.10deb1
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 30-Out-2018 às 05:03
--- Versão do servidor: 5.7.19
--- PHP Version: 7.1.9
+-- Host: 127.0.0.1
+-- Generation Time: Nov 09, 2018 at 04:17 PM
+-- Server version: 5.5.57-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `sc_erlancarreira`
+-- Database: `c9`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `address`
+-- Table structure for table `address`
 --
 
-DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `idAddress` int(11) NOT NULL AUTO_INCREMENT,
   `idProfile` int(11) NOT NULL,
@@ -39,32 +36,36 @@ CREATE TABLE IF NOT EXISTS `address` (
   `zip` char(9) DEFAULT NULL,
   PRIMARY KEY (`idAddress`),
   KEY `idProfile` (`idProfile`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
--- Extraindo dados da tabela `address`
+-- Dumping data for table `address`
 --
 
 INSERT INTO `address` (`idAddress`, `idProfile`, `address`, `number`, `city`, `state`, `zip`) VALUES
-(7, 11, 'rua qualquer bem ali', '33a', 2, 1, '44111555');
+(7, 11, 'rua qualquer bem ali', '33a', 756, 6, '44111555'),
+(8, 12, 'rua amacapá', '369', 756, 6, '60524555'),
+(9, 13, 'rua bem ali', '255a', 756, 6, '60521555'),
+(10, 14, 'rua luiz albuquerque', '333AC', 616, 5, '44555666'),
+(11, 15, 'rua bem ali com aqui', '356A', 756, 6, '60523699'),
+(12, 16, 'rua perdido', '3334', 11, 8, '44452366');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `city`
+-- Table structure for table `city`
 --
 
-DROP TABLE IF EXISTS `city`;
 CREATE TABLE IF NOT EXISTS `city` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(120) DEFAULT NULL,
   `state` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_City_state` (`state`)
-) ENGINE=InnoDB AUTO_INCREMENT=5565 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5565 ;
 
 --
--- Extraindo dados da tabela `city`
+-- Dumping data for table `city`
 --
 
 INSERT INTO `city` (`id`, `name`, `state`) VALUES
@@ -2093,7 +2094,8 @@ INSERT INTO `city` (`id`, `name`, `state`) VALUES
 (2023, 'Maria da Fé', 11),
 (2024, 'Mariana', 11),
 (2025, 'Marilac', 11),
-(2026, 'Mário Campos', 11),
+(2026, 'Mário Campos', 11);
+INSERT INTO `city` (`id`, `name`, `state`) VALUES
 (2027, 'Maripá de Minas', 11),
 (2028, 'Marliéria', 11),
 (2029, 'Marmelópolis', 11),
@@ -2134,8 +2136,7 @@ INSERT INTO `city` (`id`, `name`, `state`) VALUES
 (2064, 'Monte Sião', 11),
 (2065, 'Montes Claros', 11),
 (2066, 'Montezuma', 11),
-(2067, 'Morada Nova de Minas', 11);
-INSERT INTO `city` (`id`, `name`, `state`) VALUES
+(2067, 'Morada Nova de Minas', 11),
 (2068, 'Morro da Garça', 11),
 (2069, 'Morro do Pilar', 11),
 (2070, 'Munhoz', 11),
@@ -3961,7 +3962,8 @@ INSERT INTO `city` (`id`, `name`, `state`) VALUES
 (3890, 'Barros Cassal', 23),
 (3891, 'Benjamin Constant do Sul', 23),
 (3892, 'Bento Gonçalves', 23),
-(3893, 'Boa Vista das Missões', 23),
+(3893, 'Boa Vista das Missões', 23);
+INSERT INTO `city` (`id`, `name`, `state`) VALUES
 (3894, 'Boa Vista do Buricá', 23),
 (3895, 'Boa Vista do Cadeado', 23),
 (3896, 'Boa Vista do Incra', 23),
@@ -4044,8 +4046,7 @@ INSERT INTO `city` (`id`, `name`, `state`) VALUES
 (3973, 'Cristal do Sul', 23),
 (3974, 'Cruz Alta', 23),
 (3975, 'Cruzaltense', 23),
-(3976, 'Cruzeiro do Sul', 23);
-INSERT INTO `city` (`id`, `name`, `state`) VALUES
+(3976, 'Cruzeiro do Sul', 23),
 (3977, 'David Canabarro', 23),
 (3978, 'Derrubadas', 23),
 (3979, 'Dezesseis de Novembro', 23),
@@ -5638,10 +5639,9 @@ INSERT INTO `city` (`id`, `name`, `state`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `profile`
+-- Table structure for table `profile`
 --
 
-DROP TABLE IF EXISTS `profile`;
 CREATE TABLE IF NOT EXISTS `profile` (
   `idProfile` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
@@ -5652,31 +5652,35 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `description` text,
   PRIMARY KEY (`idProfile`),
   KEY `idUser` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
--- Extraindo dados da tabela `profile`
+-- Dumping data for table `profile`
 --
 
 INSERT INTO `profile` (`idProfile`, `idUser`, `career`, `name`, `age`, `gender`, `description`) VALUES
-(11, 1, 'veterinário', 'beltrano da silva de souza', 36, 0, 'o beltrano é veterinário de vetimlandia e manja cuidar do bixos tá ligado tio!');
+(11, 1, 'pedreiro', 'beltrano da silva de souza', 20, 0, 'o beltrano é veterinário de vetimlandia e manja cuidar dos bixos tá ligado tio!'),
+(12, 1, 'vendedor', 'fulano da silva de lis', 20, 0, 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsu.'),
+(13, 2, 'mecanico', 'fulano', 36, 0, 'qualquer coisa...'),
+(14, 7, 'advogado', 'luiz da silva ', 36, 0, 'o luiz sabe ser luiz '),
+(15, 7, 'professor', 'almeida de souza da silva', 16, 0, 'almeida de souza da silva almeida de souza da silva almeida de souza da silva almeida de souza da silva almeida de souza da silva'),
+(16, 1, 'cozinheiro', 'ze da panela', 42, 0, 'o zé se garante em fazer comida boa!');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `state`
+-- Table structure for table `state`
 --
 
-DROP TABLE IF EXISTS `state`;
 CREATE TABLE IF NOT EXISTS `state` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(75) DEFAULT NULL,
   `uf` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
--- Extraindo dados da tabela `state`
+-- Dumping data for table `state`
 --
 
 INSERT INTO `state` (`id`, `name`, `uf`) VALUES
@@ -5711,10 +5715,9 @@ INSERT INTO `state` (`id`, `name`, `uf`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(45) NOT NULL,
@@ -5722,31 +5725,37 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(256) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- Extraindo dados da tabela `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`idUser`, `userName`, `email`, `password`, `created_at`) VALUES
-(1, 'Fulano da Silva de Souza', 'fulano@hotmail.com', '123456', '2018-10-28 02:51:11');
+(1, 'Fulano da Silva de Souza', 'fulano@hotmail.com', '123456', '2018-10-28 02:51:11'),
+(2, 'jarbas', 'jarbas@hotmail.com', '123456', '2018-11-01 16:34:25'),
+(3, 'Jamal', 'jamal@hotmail.com', '123456', '2018-11-02 05:15:38'),
+(4, 'fulano@hotmail.com', 'dsdsd@dsd', '123456', '2018-11-02 22:25:01'),
+(5, 'fulano@hotmail.com', 'fulano@hotmail.com', '123456', '2018-11-02 23:01:46'),
+(6, 'ciclano@hotmail.com', 'ciclano@hotmail.com', '123456', '2018-11-02 23:17:47'),
+(7, 'be@hotmail.com', 'be@hotmail.com', '123456', '2018-11-02 23:35:56'),
+(8, 'ba@hotmail.com', 'ba@hotmail.com', '123456', '2018-11-04 22:53:26');
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `address`
+-- Constraints for table `address`
 --
 ALTER TABLE `address`
   ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`idProfile`) REFERENCES `profile` (`idProfile`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `profile`
+-- Constraints for table `profile`
 --
 ALTER TABLE `profile`
   ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
