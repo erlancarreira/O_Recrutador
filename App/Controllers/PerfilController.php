@@ -108,16 +108,16 @@ class PerfilController extends Controller
 	        unset($_SESSION['idProfile']);
         } 
         
-        //Listamos todos os recrutas deste usuario  
-        // if(isset($_GET['idProfile']) && !empty($_GET['idProfile'])) { // Se estiver setado o idProfile e caso ele nao esteja vazio 
-	       // $_SESSION['idUser'] = $_GET['idUser'];
-	       // $_SESSION['idProfile'] = $_GET['idProfile'];
+       //Listamos todos os recrutas deste usuario  
+        if(isset($_GET['idProfile']) && !empty($_GET['idProfile'])) { // Se estiver setado o idProfile e caso ele nao esteja vazio 
+	        $_SESSION['idUser'] = $_GET['idUser'];
+	        $_SESSION['idProfile'] = $_GET['idProfile'];
 	        
-	       // $result = $this->ProfileDAO->readProfile($_SESSION['idUser'],$_SESSION['idProfile']);
+	        $result = $this->ProfileDAO->readProfile($_SESSION['idUser'],$_SESSION['idProfile']);
             
-        // } 
+        } 
         
-        // self::setViewParam('perfil', $this->ProfileDAO->readProfile($_SESSION['idUser'], $_SESSION['idProfile']));
+        self::setViewParam('perfil', $this->ProfileDAO->readProfile($_SESSION['idUser'], $_SESSION['idProfile']));
 
         $this->render('perfil/excluir');	
 	}
